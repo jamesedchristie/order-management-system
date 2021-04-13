@@ -1,0 +1,60 @@
+﻿<Page x:Class="OMS.UI.Views.AddOrderView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OMS.UI.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AddOrderView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="10" />
+        </Grid.RowDefinitions>
+        <!--<Label Content="Add order" Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="6" HorizontalAlignment="Center" FontSize="18" FontWeight="Bold" />-->
+        <Label Content="ORDER" Grid.Row="1" Grid.Column="1" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding Id, Mode=OneWay}" Grid.Row="1" Grid.Column="2" Style="{StaticResource TextBoxStyle}"/>
+        <Label Content="DATETIME" Grid.Row="1" Grid.Column="3" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding DateTime, Mode=OneWay}" Grid.Row="1" Grid.Column="4" Style="{StaticResource TextBoxStyle}"/>
+        <Label Content="TOTAL" Grid.Row="1" Grid.Column="5" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding Total, StringFormat='c', Mode=OneWay}" Grid.Row="1" Grid.Column="6" Style="{StaticResource TextBoxStyle}"/>
+        <Label Content="STATE" Grid.Row="3" Grid.Column="1" Style="{StaticResource LabelStyle}"/>
+        <TextBox Text="{Binding State, Mode=OneWay}" Grid.Row="3" Grid.Column="2" Style="{StaticResource TextBoxStyle}"/>
+        <Button x:Name="btnAddOrderItem" Grid.Column="4" Grid.Row="3" Content="Add Item" Click="btnAddOrderItem_Click" Margin="1"/>
+        <Button x:Name="btnDiscardOrder" Grid.Column="5" Grid.Row="3" Content="Discard" Click="btnDiscardOrder_Click" Margin="1"/>
+        <Button x:Name="btnSubmit" Content="Submit" Grid.Column="6" Grid.Row="3" Click="btnSubmit_Click" Margin="1"/>
+        <DataGrid x:Name="dgAddOrderItems" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="6" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding OrderItems, Mode=OneWay}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="SKU" Binding="{Binding StockItemId}" Width="20*" />
+                <DataGridTextColumn Header="Item" Binding="{Binding Description}" Width="100*" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="20*" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price, StringFormat='c'}" Width="20*" />
+                <DataGridTextColumn Header="Total" Binding="{Binding Total, StringFormat='c'}" Width="20*" />
+                <DataGridTemplateColumn Width="20*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDeleteOrderItem" Content="Delete" Click="btnDeleteOrderItem_Click"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
